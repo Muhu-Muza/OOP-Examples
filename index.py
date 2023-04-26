@@ -6,11 +6,17 @@ Ensure that the balance cannot be accessed or modified outside the class.
 Use encapsulation to ensure that the data of the BankAccount object is secure.
 Create a class called Bank that should hold the accounts being created
 
+Could you modify the code so that as a user I can create various banks @Muhu-Muza
+Add bank accounts to those banks
+Eg create a bank called Tanbic
+Add accounts to the Tanbic bank
+
 """
 
 
 class Bank:
-    def __init__(self):
+    def __init__(self, name):
+        self.__name = name
         self.__accounts = {}
 
     def add_account(self, account):
@@ -29,6 +35,10 @@ class Bank:
             print("Account removed successfully")
         else:
             print("Account not found")
+
+    def get_name(self):
+        print(f"{self.__name}")
+        return self.__name
         
 
 class BankAccount:
