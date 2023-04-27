@@ -4,28 +4,70 @@ such as the account holder's name, account number, and balance.
 The class should have methods for depositing money, withdrawing money, and checking the account balance. 
 Ensure that the balance cannot be accessed or modified outside the class. 
 Use encapsulation to ensure that the data of the BankAccount object is secure.
+Create a class called Bank that should hold the accounts being created
+
+Could you modify the code so that as a user I can create various banks @Muhu-Muza
+Add bank accounts to those banks
+Eg create a bank called Tanbic
+Add accounts to the Tanbic bank
 
 """
 
+
+class Bank:
+    def __init__(self, name):
+        self.__name = name
+        self.__accounts = {}
+
+    def add_account(self, account):
+        self.__accounts[account.get_account_number()] = account
+        print("Account added successfully")
+
+    def get_account(self, account_number):
+        if account_number in self.__accounts:
+            return self.__accounts[account_number]
+        else:
+            print("Account not found")
+
+    def remove_account(self, account_number):
+        if account_number in self.__accounts:
+            del self.__accounts[account_number]
+            print("Account removed successfully")
+        else:
+            print("Account not found")
+
+    def get_name(self):
+        print(f"{self.__name}")
+        return self.__name
+        
+
 class BankAccount:
-    def __init__(self, acc_name, acc_number, balance):
+    def __init__(self, acc_name, acc_number, balance=0):
         self.__acc_name = acc_name
         self.__acc_number = acc_number
         self.__balance = balance
 
     def deposit(self, amount):
-        self.__balance += amount
-        print(f"Cash deposit of {amount} Successful. Your new balance is {self.__balance}.")
+        if amount < 0:
+            print("Cannot process this deposit, please deposit an amount greater than 0")
+        else:
+            self.__balance += amount
+            print(f"Cash deposit of {amount} Successful. Your new balance is {self.__balance}.")
 
     def withdraw(self, amount):
         if amount > self.__balance:
             print("Not enough funds to complete the transaction !")
-        self.__balance -= amount
-        print(f"Your account has been debited with {amount}. Your new balance is {self.__balance}.")
+        elif amount <= 0:
+            print("Please enter a valid amount to withdraw.")
+        else:
+            self.__balance -= amount
+            print(f"Your account has been debited with {amount}. Your new balance is {self.__balance}.")
 
     def get_balance(self):
         print(f"Your account balance is {self.__balance}.")
 
+    def get_account_number(self):
+        return self.__acc_number
 
 """
 
